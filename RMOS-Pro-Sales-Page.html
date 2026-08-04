@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Manager Bundle · RMOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F172A; --navy-soft:#1E293B; --navy-2:#182236;
+    --gold:#B9852D; --gold-soft:#E8C784; --gold-dim:#8a6423;
+    --paper:#F5F7FA; --card:#FFFFFF; --ink:#1A2333; --muted:#657586; --hair:#DDE5EE;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif; color:var(--ink); background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:'Fraunces',serif;}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+  img,svg{display:block;}
+
+  /* ---------- top bar ---------- */
+  .topbar{position:sticky; top:0; z-index:40; background:rgba(15,23,42,.92);
+    backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,255,255,.08);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; height:58px;}
+  .brandmark{color:var(--gold); font-weight:800; letter-spacing:.06em; font-size:14px;}
+  .topbar a.cta{background:var(--gold); color:var(--navy); font-weight:700; font-size:13px;
+    padding:9px 18px; border-radius:7px; text-decoration:none;}
+
+  /* ---------- hero ---------- */
+  .hero{background:radial-gradient(120% 140% at 15% -10%, #1c2947 0%, var(--navy) 55%);
+    color:#fff; padding:64px 0 84px; overflow:hidden; position:relative;}
+  .hero .wrap{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;}
+  .eyebrow{color:var(--gold); font-weight:700; font-size:12.5px; letter-spacing:.14em;
+    text-transform:uppercase; margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:""; width:22px; height:1.5px; background:var(--gold);}
+  h1{font-family:'Fraunces',serif; font-weight:600; font-size:44px; line-height:1.08;
+    letter-spacing:-.01em; margin-bottom:20px;}
+  h1 em{font-style:italic; color:var(--gold-soft);}
+  .hero p.lede{font-size:17px; line-height:1.6; color:#B7C2D6; max-width:46ch; margin-bottom:28px;}
+  .hero-ctas{display:flex; gap:14px; align-items:center; flex-wrap:wrap;}
+  .btn-primary{background:var(--gold); color:var(--navy); font-weight:700; font-size:14.5px;
+    padding:14px 26px; border-radius:8px; text-decoration:none; display:inline-block;
+    box-shadow:0 10px 30px -8px rgba(185,133,45,.55); transition:transform .15s ease;}
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-ghost{color:#D7DEEA; font-size:14px; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.25); padding-bottom:2px;}
+
+  /* ---------- score card (signature element) ---------- */
+  .scorecard{background:var(--navy-2); border:1px solid rgba(255,255,255,.09);
+    border-radius:16px; padding:26px 26px 22px; box-shadow:0 30px 60px -20px rgba(0,0,0,.55);}
+  .scorecard-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;}
+  .scorecard-top span{font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:#8899B3; font-weight:700;}
+  .score-display{display:flex; align-items:flex-end; gap:14px; margin:6px 0 18px;}
+  .score-num{font-family:'Fraunces',serif; font-weight:600; font-size:64px; line-height:1;
+    color:var(--gold-soft); font-variant-numeric:tabular-nums;}
+  .score-grade{background:rgba(232,199,132,.12); border:1px solid rgba(232,199,132,.3);
+    color:var(--gold-soft); font-weight:700; font-size:15px; border-radius:8px;
+    padding:5px 12px; margin-bottom:8px;}
+  .score-sub{color:#93A1BA; font-size:12.5px; margin-bottom:4px;}
+  .sliders{display:flex; flex-direction:column; gap:13px;}
+  .slider-row{display:grid; grid-template-columns:108px 1fr 30px; align-items:center; gap:10px;}
+  .slider-row label{font-size:11.5px; color:#B7C2D6; font-weight:600;}
+  .slider-row output{font-size:12px; color:var(--gold-soft); text-align:right; font-variant-numeric:tabular-nums;}
+  input[type=range]{-webkit-appearance:none; width:100%; height:4px; border-radius:2px;
+    background:rgba(255,255,255,.14); outline:none;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:14px; height:14px;
+    border-radius:50%; background:var(--gold); cursor:pointer; border:2px solid #1c2947;}
+  input[type=range]::-moz-range-thumb{width:14px; height:14px; border-radius:50%;
+    background:var(--gold); cursor:pointer; border:2px solid #1c2947;}
+  .scorecard-foot{margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,.08);
+    font-size:11.5px; color:#7f8caa; line-height:1.5;}
+
+  /* ---------- section shell ---------- */
+  section{padding:76px 0;}
+  .kicker{color:var(--gold-dim); font-weight:700; font-size:12px; letter-spacing:.14em;
+    text-transform:uppercase; margin-bottom:12px;}
+  h2{font-family:'Fraunces',serif; font-weight:600; font-size:32px; letter-spacing:-.01em;
+    color:var(--navy); margin-bottom:14px;}
+  .section-intro{color:var(--muted); font-size:15.5px; max-width:56ch; line-height:1.65;}
+
+  /* ---------- ladder ---------- */
+  .ladder{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:40px; align-items:stretch;}
+  .plan{background:var(--card); border:1px solid var(--hair); border-radius:14px;
+    padding:24px 22px; display:flex; flex-direction:column;}
+  .plan .name{font-weight:700; font-size:14px; color:var(--navy); margin-bottom:6px;}
+  .plan .price{font-family:'Fraunces',serif; font-size:30px; font-weight:600; color:var(--navy); margin-bottom:14px;}
+  .plan .price small{font-family:'Inter',sans-serif; font-size:13px; font-weight:500; color:var(--muted);}
+  .plan ul{list-style:none; font-size:13px; color:var(--muted); line-height:1.7; flex:1;}
+  .plan ul li{padding-left:16px; position:relative; margin-bottom:6px;}
+  .plan ul li::before{content:"\2022"; color:var(--gold); position:absolute; left:0; font-weight:700;}
+  .plan .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.06em;
+    text-transform:uppercase; padding:3px 9px; border-radius:5px; margin-bottom:12px; width:fit-content;}
+  .plan.free .tag{background:#EEF2F6; color:var(--muted);}
+  .plan.solo .tag{background:#EEF2F6; color:var(--muted);}
+  .plan.bundle{background:var(--navy); border-color:var(--navy); color:#fff;
+    transform:scale(1.045); box-shadow:0 24px 50px -18px rgba(15,23,42,.45); position:relative; z-index:2;}
+  .plan.bundle .name{color:#fff;} .plan.bundle .price{color:#fff;}
+  .plan.bundle .price small{color:#93A1BA;}
+  .plan.bundle ul{color:#B7C2D6;} .plan.bundle ul li::before{color:var(--gold);}
+  .plan.bundle .tag{background:var(--gold); color:var(--navy);}
+  .plan-cta{margin-top:18px; text-align:center; font-weight:700; font-size:13px; padding:11px;
+    border-radius:8px; text-decoration:none; border:1px solid var(--hair); color:var(--navy);}
+  .plan.bundle .plan-cta{background:var(--gold); color:var(--navy); border:none;}
+
+  /* ---------- value math ---------- */
+  .math{background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:30px 34px;
+    margin-top:20px; display:grid; grid-template-columns:1fr auto 1fr; gap:24px; align-items:center;}
+  .math .col{}
+  .math .row{display:flex; justify-content:space-between; font-size:14px; padding:7px 0;
+    border-bottom:1px dashed var(--hair); color:var(--muted);}
+  .math .row b{color:var(--navy);}
+  .math .divider{width:1px; align-self:stretch; background:var(--hair);}
+  .math .save{text-align:center;}
+  .math .save .n{font-family:'Fraunces',serif; font-size:38px; color:var(--gold-dim); font-weight:600;}
+  .math .save .l{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-top:4px;}
+
+  /* ---------- included ---------- */
+  .included{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:40px;}
+  .inc-card{background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:26px;}
+  .inc-card .num{font-family:'Fraunces',serif; color:var(--gold); font-size:13px; font-weight:600; margin-bottom:10px;}
+  .inc-card h3{font-size:17px; color:var(--navy); margin-bottom:8px; font-weight:700;}
+  .inc-card p{font-size:13.5px; color:var(--muted); line-height:1.6;}
+  .inc-card .fmt{margin-top:14px; font-size:11px; color:var(--gold-dim); font-weight:700;
+    text-transform:uppercase; letter-spacing:.06em;}
+
+  /* ---------- who / cta ---------- */
+  .dark-band{background:var(--navy); color:#fff; padding:70px 0; text-align:center;}
+  .dark-band h2{color:#fff;}
+  .dark-band p{color:#B7C2D6; max-width:52ch; margin:0 auto 28px; font-size:15.5px; line-height:1.6;}
+
+  .founder-banner{background:linear-gradient(90deg, #8a6423, var(--gold), #8a6423); color:var(--navy);
+    text-align:center; padding:11px 16px; font-size:13px; font-weight:700; letter-spacing:.01em;}
+  .founder-banner b{text-decoration:underline; text-underline-offset:2px;}
+  .strike{color:#93A1BA; text-decoration:line-through; font-size:16px; font-weight:600; margin-right:8px;}
+  .plan.bundle .strike{color:#5B6B85;}
+  .launch-tag{display:inline-block; background:var(--gold); color:var(--navy); font-size:9.5px;
+    font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:2px 7px; border-radius:5px;
+    margin-left:8px; vertical-align:middle;}
+
+  .faq{max-width:760px; margin:40px auto 0;}
+  .faq details{border-bottom:1px solid var(--hair); padding:18px 0;}
+  .faq summary{cursor:pointer; font-weight:700; font-size:14.5px; color:var(--navy);
+    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+"; color:var(--gold); font-size:20px; font-weight:400; flex:none;}
+  .faq details[open] summary::after{content:"\2212";}
+  .faq p{color:var(--muted); font-size:13.5px; line-height:1.65; margin-top:10px; padding-right:24px;}
+
+  .who-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:36px;}
+  .who-col{border-radius:14px; padding:26px 28px;}
+  .who-col.yes{background:var(--navy); color:#fff;}
+  .who-col.no{background:var(--card); border:1px solid var(--hair);}
+  .who-label{font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px;}
+  .who-col.yes .who-label{color:var(--gold-soft);}
+  .who-col.no .who-label{color:var(--muted);}
+  .who-col ul{list-style:none;}
+  .who-col li{padding-left:20px; position:relative; margin-bottom:11px; font-size:13.5px; line-height:1.5;}
+  .who-col.yes li{color:#D7DEEA;}
+  .who-col.no li{color:var(--muted);}
+  .who-col.yes li::before{content:"\2713"; position:absolute; left:0; color:var(--gold); font-weight:700;}
+  .who-col.no li::before{content:"\2013"; position:absolute; left:0; color:#B0BAC8;}
+
+  .guarantee{background:var(--card); border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);}
+  .guarantee-inner{display:flex; gap:26px; align-items:center; padding:14px 0;}
+  .g-badge{flex:none; width:76px; height:76px; border-radius:50%; border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif;
+    font-weight:600; font-size:12px; color:var(--gold-dim); text-align:center; line-height:1.2;}
+  .guarantee-inner h3{font-family:'Fraunces',serif; font-size:19px; color:var(--navy); margin-bottom:6px;}
+  .guarantee-inner p{font-size:13.5px; color:var(--muted); line-height:1.6; max-width:62ch;}
+
+  footer{padding:36px 0; text-align:center; color:var(--muted); font-size:12.5px; border-top:1px solid var(--hair);}
+
+  @media (max-width:880px){
+    .hero .wrap{grid-template-columns:1fr;}
+    h1{font-size:34px;}
+    .ladder{grid-template-columns:1fr 1fr;}
+    .plan.bundle{transform:none; grid-column:span 2;}
+    .math{grid-template-columns:1fr; text-align:center;}
+    .math .divider{display:none;}
+    .included{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important;} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brandmark">RMOS</div>
+    <a class="cta" href="#pricing">Get the Bundle ($139)</a>
+  </div>
+</div>
+<div class="founder-banner">Founding Member Bundle Pricing, $139: Limited to the First 100 Customers</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">The Manager Bundle</div>
+      <h1>Everything it takes to run your floor like a <em>system</em>, not a fire drill.</h1>
+      <p class="lede">The manual, the bootcamp, and the bonus toolkit, together, at the best
+        price on the ladder. One purchase, six weeks to a fully installed operating system.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="#pricing">Get the Bundle ($139)</a>
+        <a class="btn-ghost" href="#included">See what's included</a>
+      </div>
+    </div>
+    <div class="scorecard">
+      <div class="scorecard-top"><span>Try the scoring system</span></div>
+      <div class="score-display">
+        <div class="score-num" id="scoreNum">75</div>
+        <div class="score-grade" id="scoreGrade">C &middot; performing well</div>
+      </div>
+      <div class="score-sub">Drag each pillar to see how your Health Score moves.</div>
+      <div class="sliders" id="sliders"></div>
+      <div class="scorecard-foot">This is the exact scoring model from the manual and the
+        live RMOS software. Five pillars, zero to twenty each, one number out of one hundred.</div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="kicker">The Ladder</div>
+    <h2>Four ways in. One clear best deal.</h2>
+    <p class="section-intro">Start free, or skip straight to the bundle. Either way, the
+      Health Score system and the five pillars are the same at every tier, what changes is
+      how much of the installation is done for you.</p>
+
+    <div class="ladder">
+      <div class="plan free">
+        <div class="tag">Free</div>
+        <div class="name">Daily Checklist</div>
+        <div class="price">$0</div>
+        <ul>
+          <li>Opening, midday, and closing checklist</li>
+          <li>One-page Health Score worksheet</li>
+          <li>The paper version of the system</li>
+        </ul>
+        <a class="plan-cta" href="RMOS-Email-Capture-Landing.html">Get it free</a>
+      </div>
+      <div class="plan solo">
+        <div class="tag">Read it</div>
+        <div class="name">The Manual</div>
+        <div class="price">$49</div>
+        <ul>
+          <li>16 chapters, the full methodology</li>
+          <li>The five pillars and the Health Score, explained</li>
+          <li>Appendix with checklist and worksheet</li>
+        </ul>
+        <a class="plan-cta" href="https://mattenglehart.gumroad.com/l/rmos-manual">Get the manual</a>
+      </div>
+      <div class="plan solo">
+        <div class="tag">Install it</div>
+        <div class="name">The Bootcamp</div>
+        <div class="price">$99</div>
+        <ul>
+          <li>Six modules, one per week</li>
+          <li>Fill-in worksheets for your real floor</li>
+          <li>A checkpoint question every week</li>
+        </ul>
+        <a class="plan-cta" href="https://mattenglehart.gumroad.com/l/rmos-bootcamp">Get the bootcamp</a>
+      </div>
+      <div class="plan bundle">
+        <div class="tag">Best Value</div>
+        <div class="name">The Manager Bundle</div>
+        <div class="price"><span class="strike">$169</span>$139<span class="launch-tag">Founding</span></div>
+        <ul>
+          <li>The Manual, complete</li>
+          <li>The Bootcamp, complete</li>
+          <li>The 7-page Bonus Toolkit, 9 templates</li>
+          <li>Quick Start Guide, bundle exclusive</li>
+          <li>Terms &amp; onboarding kit, bundle exclusive</li>
+          <li>Early access to RMOS Pro</li>
+        </ul>
+        <a class="plan-cta" href="https://mattenglehart.gumroad.com/l/rmos-bundle/FOUNDER100">Get the bundle</a>
+      </div>
+    </div>
+    <p style="text-align:center; font-size:11.5px; color:var(--muted); margin-top:14px;">
+      Manual and Bootcamp are shown at everyday pricing. The Bundle's founding price is
+      $139 for the first 100 customers, $169 after that, and includes everything above,
+      nothing here is available piecemeal.</p>
+
+    <div class="math">
+      <div class="col">
+        <div class="row"><span>Manual, alone</span><b>$49</b></div>
+        <div class="row"><span>Bootcamp, alone</span><b>$99</b></div>
+        <div class="row" style="border-bottom:none;"><span>Bought separately</span><b>$148</b></div>
+      </div>
+      <div class="divider"></div>
+      <div class="save">
+        <div class="n">$139 founding</div>
+        <div class="l">Less than Manual + Bootcamp alone, plus the toolkit, quick start
+          guide, onboarding kit, and early Pro access, none of it sold separately</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="included" style="background:var(--card); border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);">
+  <div class="wrap">
+    <div class="kicker">What's Inside</div>
+    <h2>Everything, none of it sold separately as a set.</h2>
+    <p class="section-intro">Three core pieces, plus the extras that only come with the
+      bundle.</p>
+    <div class="included">
+      <div class="inc-card">
+        <div class="num">01</div>
+        <h3>The Manual</h3>
+        <p>The complete methodology. Sixteen chapters across six parts, written to be read
+          once, straight through, then kept as a reference.</p>
+        <div class="fmt">23-page PDF</div>
+      </div>
+      <div class="inc-card">
+        <div class="num">02</div>
+        <h3>The Bootcamp</h3>
+        <p>The guided install. Six weekly modules, each with an objective, a specific
+          action, a fill-in worksheet, and a checkpoint question.</p>
+        <div class="fmt">12-page PDF workbook</div>
+      </div>
+      <div class="inc-card">
+        <div class="num">03</div>
+        <h3>The Bonus Toolkit</h3>
+        <p>Nine templates: quick reference card, 30-day tracker, shift handoff, priority
+          matrix, SMART goals, coaching log, store walk, delegation, and new hire onboarding.</p>
+        <div class="fmt">7-page PDF</div>
+      </div>
+    </div>
+    <div class="who-grid" style="grid-template-columns:1fr; margin-top:16px;">
+      <div class="who-col no" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px 24px;">
+        <div><b style="color:var(--navy); font-size:13px;">Quick Start Guide</b><br>
+          <span style="font-size:12px;">Bundle exclusive. The order to actually run all of this in.</span></div>
+        <div><b style="color:var(--navy); font-size:13px;">Terms &amp; Disclaimer</b><br>
+          <span style="font-size:12px;">Bundle exclusive. Plain language, ready to adapt.</span></div>
+        <div><b style="color:var(--navy); font-size:13px;">Certificate of Completion</b><br>
+          <span style="font-size:12px;">For finishing all six Bootcamp weeks.</span></div>
+        <div><b style="color:var(--navy); font-size:13px;">Early RMOS Pro Access</b><br>
+          <span style="font-size:12px;">First access plus a locked-in founding software price.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="kicker">Fit Check</div>
+    <h2>Who this is actually for</h2>
+    <div class="who-grid">
+      <div class="who-col yes">
+        <div class="who-label">Built For</div>
+        <ul>
+          <li>Department, assistant, and store managers who own a piece of a retail floor</li>
+          <li>Managers who want a repeatable system, not another motivational read</li>
+          <li>Anyone willing to actually run a daily rhythm, not just study one</li>
+          <li>Managers who want their weekly review to be a real conversation with numbers behind it</li>
+        </ul>
+      </div>
+      <div class="who-col no">
+        <div class="who-label">Not Built For</div>
+        <ul>
+          <li>Anyone looking for a one time fix with no follow-through required</li>
+          <li>Enterprise ops teams needing custom integrations beyond Multi-Store</li>
+          <li>Someone whose current system is already working well for them</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="guarantee">
+  <div class="wrap guarantee-inner">
+    <div class="g-badge">DO THE<br>WORK<br>GUARANTEE</div>
+    <div>
+      <h3>Run it for 7 days first.</h3>
+      <p>Start with the free checklist and actually run it for a week. If you do that
+        honestly and the system still doesn't fit how you manage, email me and I'll refund
+        the Manual, Bootcamp, or Bundle in full. No form, no hoops, I just want you to
+        genuinely try it before you decide.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="kicker">Questions</div>
+    <h2>Before you buy</h2>
+    <div class="faq">
+      <details>
+        <summary>Do I need the Manual before the Bootcamp?</summary>
+        <p>Not strictly, the Bootcamp explains what it needs as it goes. But the Manual gives
+          you the full reasoning behind each move, and most people find the six weeks click
+          faster once they've read it. The Bundle includes both either way.</p>
+      </details>
+      <details>
+        <summary>What's actually different between the Manual and the Bootcamp?</summary>
+        <p>The Manual is sixteen chapters, read once, kept as a reference. The Bootcamp is six
+          worksheets, one a week, built for you to write in using your real floor and your real
+          team. One teaches the system, the other installs it.</p>
+      </details>
+      <details>
+        <summary>Will this work for my specific type of store?</summary>
+        <p>The five pillars and the Health Score are deliberately generic. They're written to
+          sit on top of whatever terminology and standards your store already uses, not
+          replace them.</p>
+      </details>
+      <details>
+        <summary>Do I need RMOS Pro, or does the paper system work on its own?</summary>
+        <p>The Manual, Bootcamp, and Toolkit are a complete paper system on their own. RMOS Pro
+          is the same system running as software, for when you're ready to stop tracking it by
+          hand. Neither one requires the other.</p>
+      </details>
+      <details>
+        <summary>How long before I see a difference in my Health Score?</summary>
+        <p>The Bootcamp is built around a six week install, and most of that is habit forming,
+          not score chasing. The score becomes a reliable trend line somewhere around week
+          three or four, once you've got a few weeks of honest scoring behind you.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="dark-band">
+  <div class="wrap">
+    <div class="kicker" style="color:var(--gold-soft);">Ready When You Are</div>
+    <h2>Read it this week. Install it in six.</h2>
+    <p>The bundle is the same system as the free checklist, just with the manual behind it,
+      the six-week install plan, and the tools to keep score after week six ends.</p>
+    <a class="btn-primary" href="#pricing">Get the Bundle ($139)</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">RMOS &middot; The Retail Manager Operating System &middot; Built by a department manager who runs this every day.</div>
+</footer>
+
+<script>
+  const pillars = [
+    {key:'team', label:'Team Readiness', val:15},
+    {key:'floor', label:'Floor Condition', val:15},
+    {key:'task', label:'Task Completion', val:15},
+    {key:'cust', label:'Customer Exp.', val:15},
+    {key:'safety', label:'Safety & Comp.', val:15},
+  ];
+  const slidersEl = document.getElementById('sliders');
+  pillars.forEach(p=>{
+    const row = document.createElement('div');
+    row.className = 'slider-row';
+    row.innerHTML = `<label>${p.label}</label>
+      <input type="range" min="0" max="20" value="${p.val}" data-key="${p.key}">
+      <output id="out-${p.key}">${p.val}</output>`;
+    slidersEl.appendChild(row);
+  });
+  function bandFor(total){
+    if(total>=90) return ['A','excellent'];
+    if(total>=80) return ['B','strong'];
+    if(total>=70) return ['C','performing well'];
+    if(total>=60) return ['D','needs attention'];
+    return ['F','at risk'];
+  }
+  function recalc(){
+    let total = 0;
+    pillars.forEach(p=>{
+      const input = slidersEl.querySelector(`input[data-key="${p.key}"]`);
+      p.val = parseInt(input.value,10);
+      document.getElementById(`out-${p.key}`).textContent = p.val;
+      total += p.val;
+    });
+    document.getElementById('scoreNum').textContent = total;
+    const [grade, desc] = bandFor(total);
+    document.getElementById('scoreGrade').textContent = `${grade} \u00b7 ${desc}`;
+  }
+  slidersEl.addEventListener('input', recalc);
+  recalc();
+</script>
+</body>
+</html>
