@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RMOS Academy, Free 7-Day Retail Manager Training</title>
+<meta name="description" content="A free seven-day email course for retail managers who want clearer priorities, stronger daily habits, and a department that does not depend on one person remembering everything.">
+
+<meta property="og:title" content="RMOS Academy, Free 7-Day Retail Manager Training">
+<meta property="og:description" content="Stop managing by memory. Start leading with a system. Free seven-day course, three practical tools, built from real retail management experience.">
+<meta property="og:type" content="website">
+<!-- OG_IMAGE_PATH: place the final 1200x630 social preview image at this
+     exact filename, alongside this HTML file. Kept as a plain static
+     meta tag on purpose, not JS-injected, since most social media
+     crawlers do not execute JavaScript when reading these tags. -->
+<meta property="og:image" content="rmos-academy-og-image.jpg">
+
+<style>
+  :root{
+    --navy:#0F172A; --navy-soft:#1E293B; --gold:#B9852D; --gold-soft:#E8C784;
+    --paper:#F5F7FA; --card:#FFFFFF; --ink:#1A2333; --muted:#657586;
+    --blue-deep:#1b2b4d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;
+    background:var(--navy); color:#fff; -webkit-font-smoothing:antialiased;}
+  img,video{max-width:100%;display:block;}
+  a{color:inherit;}
+
+  header{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;
+    align-items:center;padding:18px 24px;background:rgba(15,23,42,0.94);
+    backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.08);}
+  .mark{font-weight:800;font-size:19px;letter-spacing:1px;}
+  .mark span{color:var(--gold);}
+  .back-link{font-size:13.5px;color:#8290A8;text-decoration:none;font-weight:600;}
+  .back-link:hover{color:#fff;}
+
+  section{padding:60px 24px;max-width:720px;margin:0 auto;}
+  section.wide{max-width:960px;}
+
+  .hero{text-align:center;padding:68px 24px 52px;}
+  .hero h1{font-size:clamp(30px,6vw,50px);font-weight:800;line-height:1.16;margin-bottom:20px;}
+  .hero h1 .accent{color:var(--gold);}
+  .hero p.lead{font-size:17.5px;line-height:1.6;color:#C7D0E0;max-width:540px;margin:0 auto 30px;}
+  .cta-btn{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;
+    font-size:16.5px;padding:17px 36px;border-radius:14px;text-decoration:none;
+    border:0;cursor:pointer;}
+  .cta-btn:hover{filter:brightness(1.08);}
+  .hero-stats{display:flex;justify-content:center;gap:26px;margin-top:32px;
+    flex-wrap:wrap;color:#8290A8;font-size:13.5px;font-weight:600;}
+  .hero-stats span{display:flex;align-items:center;gap:7px;}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+
+  .video-wrap{max-width:320px;margin:0 auto;}
+  .video-frame{position:relative;width:100%;aspect-ratio:9/16;
+    background:linear-gradient(160deg,var(--blue-deep),var(--navy));
+    border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);}
+  .video-frame video{width:100%;height:100%;object-fit:cover;}
+  .video-frame .fallback{position:absolute;inset:0;display:flex;align-items:center;
+    justify-content:center;color:#8290A8;font-size:13.5px;text-align:center;padding:22px;}
+
+  h2.section-title{font-size:27px;font-weight:800;text-align:center;margin-bottom:10px;}
+  p.section-sub{color:#8290A8;text-align:center;max-width:540px;margin:0 auto 8px;line-height:1.6;}
+
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px;}
+  .compare .col{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+    border-radius:16px;padding:22px;}
+  .compare .col.after{border-color:rgba(185,133,45,0.35);background:rgba(185,133,45,0.06);}
+  .compare .col h3{font-size:13px;font-weight:800;letter-spacing:1px;margin-bottom:14px;
+    color:#8290A8;text-transform:uppercase;}
+  .compare .col.after h3{color:var(--gold);}
+  .compare .col ul{list-style:none;}
+  .compare .col li{font-size:14.5px;line-height:1.5;color:#E5E9F0;padding:7px 0;
+    border-bottom:1px solid rgba(255,255,255,0.06);}
+  .compare .col li:last-child{border-bottom:0;}
+
+  .tools{display:grid;gap:16px;margin-top:30px;}
+  .tool-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px;padding:24px;}
+  .tool-card .free-tag{display:inline-block;font-size:10.5px;font-weight:800;
+    letter-spacing:1px;color:var(--gold);background:rgba(185,133,45,0.12);
+    padding:4px 10px;border-radius:999px;margin-bottom:10px;}
+  .tool-card h3{font-size:18px;font-weight:700;margin-bottom:7px;}
+  .tool-card p{color:#8290A8;font-size:13.5px;line-height:1.5;}
+
+  .curriculum{margin-top:26px;display:flex;flex-direction:column;gap:9px;}
+  .day{display:flex;align-items:center;gap:15px;
+    background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px;padding:14px 16px;}
+  .day .num{flex-shrink:0;width:32px;height:32px;border-radius:50%;
+    background:var(--blue-deep);color:#fff;font-weight:800;font-size:13px;
+    display:flex;align-items:center;justify-content:center;}
+  .day .title{font-size:14px;font-weight:600;color:#E5E9F0;}
+
+  .signup-box{background:linear-gradient(150deg,var(--blue-deep),var(--navy));
+    border-radius:22px;padding:44px 26px;text-align:center;
+    border:1px solid rgba(185,133,45,0.25);}
+  .signup-box h2{font-size:26px;font-weight:800;margin-bottom:10px;}
+  .signup-box p{color:#C7D0E0;font-size:14px;margin-bottom:26px;}
+  .kit-form-container{max-width:400px;margin:0 auto;min-height:110px;
+    display:flex;align-items:center;justify-content:center;width:100%;overflow-x:hidden;}
+
+  /* Best-effort styling for Kit's injected form. Kit renders its own
+     markup at runtime, this targets its common plain input/button/form
+     output so it fits the page instead of looking bolted on. Cannot
+     guarantee exact output since it's a third-party embed. */
+  .kit-form-container form{width:100%;}
+  .kit-form-container input[type="email"],
+  .kit-form-container input[type="text"]{
+    width:100%;box-sizing:border-box;padding:14px 16px;border-radius:12px;
+    border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);
+    color:#fff;font-size:15px;margin-bottom:12px;}
+  .kit-form-container input::placeholder{color:#8290A8;}
+  .kit-form-container button,
+  .kit-form-container input[type="submit"]{
+    width:100%;background:var(--gold);color:var(--navy);font-weight:800;
+    font-size:15px;padding:14px 20px;border-radius:12px;border:0;cursor:pointer;}
+  .kit-placeholder{width:100%;padding:26px;border:2px dashed rgba(185,133,45,0.4);
+    border-radius:14px;color:var(--gold);font-weight:700;font-size:13.5px;}
+  .privacy-note{font-size:11.5px;color:#6b7994;margin-top:18px;max-width:400px;
+    margin-left:auto;margin-right:auto;line-height:1.5;}
+
+  .faq{margin-top:22px;display:flex;flex-direction:column;gap:2px;}
+  .faq-item{border-bottom:1px solid rgba(255,255,255,0.08);}
+  .faq-q{width:100%;text-align:left;background:none;border:0;color:#fff;
+    font-size:15px;font-weight:700;padding:18px 4px;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;}
+  .faq-a{color:#8290A8;font-size:13.5px;line-height:1.6;padding:0 4px 18px;display:none;}
+  .faq-item.open .faq-a{display:block;}
+  .faq-icon{transition:transform .2s;color:var(--gold);font-size:19px;}
+  .faq-item.open .faq-icon{transform:rotate(45deg);}
+
+
+  .final-cta{text-align:center;padding:60px 24px 76px;}
+  .final-cta h2{font-size:clamp(24px,4.5vw,36px);font-weight:800;margin-bottom:26px;line-height:1.25;}
+
+
+  footer{border-top:1px solid rgba(255,255,255,0.08);padding:38px 24px;text-align:center;
+    color:#6b7994;font-size:12.5px;line-height:1.8;}
+  footer a{color:#8290A8;text-decoration:none;margin:0 9px;}
+  footer a:hover{color:#fff;}
+
+
+  .preview-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px;}
+  .preview-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px;overflow:hidden;}
+  .preview-img-slot{aspect-ratio:4/3;background:rgba(255,255,255,0.03);
+    display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .preview-img-slot img{width:100%;height:100%;object-fit:cover;}
+  .preview-placeholder-label{color:var(--gold);font-size:11.5px;font-weight:700;
+    text-align:center;padding:16px;letter-spacing:0.5px;}
+  .preview-card .caption{padding:14px 16px;font-size:13.5px;font-weight:600;color:#E5E9F0;text-align:center;}
+  @media(max-width:640px){.preview-cards{grid-template-columns:1fr;}}
+
+  .outcomes{margin-top:28px;display:flex;flex-direction:column;gap:14px;}
+  .outcome{display:flex;gap:14px;align-items:flex-start;
+    background:rgba(185,133,45,0.06);border:1px solid rgba(185,133,45,0.2);
+    border-radius:14px;padding:18px 20px;}
+  .outcome .check{color:var(--gold);font-size:20px;font-weight:800;flex-shrink:0;line-height:1.3;}
+  .outcome p{font-size:15px;color:#E5E9F0;line-height:1.5;}
+  .positioning-line{text-align:center;color:#8290A8;font-size:14.5px;font-style:italic;
+    max-width:560px;margin:26px auto 0;line-height:1.6;}
+
+  @media(max-width:520px){
+    .compare{grid-template-columns:1fr;}
+    section{padding:44px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="mark">RM<span>OS</span> ACADEMY</div>
+  <a class="back-link" href="RMOS-Pro-Sales-Page.html">Explore the Full RMOS System &#8594;</a>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>Stop Managing by Memory.<br>Start Leading With <span class="accent">a System.</span></h1>
+    <p class="lead">
+      RMOS Academy is a free seven-day training series for retail managers who
+      want clearer priorities, stronger daily habits, better coaching
+      follow-through, and a department that does not depend on one person
+      remembering everything.
+    </p>
+    <button class="cta-btn" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">
+      Start RMOS Academy Free
+    </button>
+    <div class="hero-stats">
+      <span><span class="dot"></span>7 free lessons</span>
+      <span><span class="dot"></span>3 practical manager tools</span>
+      <span><span class="dot"></span>Built from real retail management experience</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="video-wrap">
+      <div class="video-frame">
+        <!-- Set the video src below once a final file exists. Fallback
+             renders until then, never a broken player. No autoplay audio. -->
+        <div class="fallback" id="videoFallback">RM<span style="color:#B9852D">OS</span> Academy video coming soon.</div>
+        <video id="videoEl" controls playsinline preload="none" poster="RMOS-Academy-Video-Poster.jpg" style="display:none;"></video>
+      </div>
+    </div>
+    <p style="text-align:center;color:#8290A8;font-size:14px;max-width:480px;margin:18px auto 0;line-height:1.6;">
+      RMOS was created inside a working retail department, not in a
+      consulting office. Matthew Englehart built the system through years of
+      managing people, inventory, merchandising, coaching, and daily
+      operations. The Academy teaches the same practical operating
+      principles he uses to run his own department.
+    </p>
+  </section>
+
+  <section class="wide">
+    <h2 class="section-title">Most managers are running on memory.</h2>
+    <p class="section-sub">
+      Handwritten notes. Scattered messages. Constant reaction instead of a
+      plan. RMOS Academy teaches a repeatable operating system to replace
+      all of it, one lesson at a time.
+    </p>
+    <div class="compare">
+      <div class="col">
+        <h3>Before</h3>
+        <ul>
+          <li>Unclear priorities</li>
+          <li>Constant interruptions</li>
+          <li>Forgotten follow-ups</li>
+          <li>Standards living in one manager's head</li>
+        </ul>
+      </div>
+      <div class="col after">
+        <h3>After</h3>
+        <ul>
+          <li>A clear daily mission</li>
+          <li>Measurable department health</li>
+          <li>Organized coaching follow-up</li>
+          <li>Repeatable standards and routines</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wide">
+    <h2 class="section-title">What you get, free</h2>
+    <p class="section-sub">Included with RMOS Academy, no cost, no card required.</p>
+    <div class="tools">
+      <div class="tool-card">
+        <div class="free-tag">FREE WITH ACADEMY</div>
+        <h3>Daily Checklist</h3>
+        <p>A repeatable opening, midday, and closing structure.</p>
+      </div>
+      <div class="tool-card">
+        <div class="free-tag">FREE WITH ACADEMY</div>
+        <h3>Department Health Score Worksheet</h3>
+        <p>A practical way to assess five key operating pillars.</p>
+      </div>
+      <div class="tool-card">
+        <div class="free-tag">FREE WITH ACADEMY</div>
+        <h3>Quick Reference Card</h3>
+        <p>A compact guide for daily priorities and decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- "See What You'll Receive" preview section removed until real preview
+       images exist for the three tools. A visible "not yet supplied"
+       placeholder does more damage to credibility than no section at all.
+       Re-add once real images are available. -->
+
+
+  <section class="wide">
+    <h2 class="section-title">The Seven-Day Curriculum</h2>
+    <p class="section-sub">One practical lesson per day. No filler. Built for managers who are already busy.</p>
+    <div class="curriculum">
+      <div class="day"><div class="num">1</div><div class="title">The Manager's Daily Mission</div></div>
+      <div class="day"><div class="num">2</div><div class="title">Department Health That Matters</div></div>
+      <div class="day"><div class="num">3</div><div class="title">Building Consistent Daily Habits</div></div>
+      <div class="day"><div class="num">4</div><div class="title">People, Coaching, and Accountability</div></div>
+      <div class="day"><div class="num">5</div><div class="title">Inventory and Operational Excellence</div></div>
+      <div class="day"><div class="num">6</div><div class="title">Finding Root Causes and Preventing Repeat Problems</div></div>
+      <div class="day"><div class="num">7</div><div class="title">Leading a High-Performance Department</div></div>
+    </div>
+    <p class="positioning-line">
+      Each lesson teaches one part of the same system used inside the
+      complete RMOS platform.
+    </p>
+  </section>
+
+  <section class="wide">
+    <h2 class="section-title">What Changes After Seven Days?</h2>
+    <div class="outcomes">
+      <div class="outcome"><span class="check">&#10003;</span><p>Start every shift with a defined mission.</p></div>
+      <div class="outcome"><span class="check">&#10003;</span><p>Assess department health before problems become emergencies.</p></div>
+      <div class="outcome"><span class="check">&#10003;</span><p>Keep coaching, standards, and follow-ups from living only in the manager's memory.</p></div>
+    </div>
+    <p class="positioning-line">
+      This is not a collection of motivational emails or corporate theory.
+      Each lesson installs one part of a working retail management system.
+    </p>
+  </section>
+
+  <section class="wide">
+    <h2 class="section-title">The Academy Teaches the Method. RMOS Runs the System.</h2>
+    <p class="section-sub">
+      The free Academy helps you build the habits and understand the
+      operating principles behind a stronger retail department.
+    </p>
+    <p class="section-sub">
+      The complete RMOS platform brings those principles together in one
+      place, daily priorities, department health, coaching follow-ups,
+      inventory issues, standards, tasks, incidents, and operational
+      insights.
+    </p>
+    <p class="section-sub" style="color:#E5E9F0;font-weight:600;">
+      Start with the Academy. Learn the method. Then decide whether you
+      want the full system working beside you.
+    </p>
+  </section>
+
+  <section id="signup">
+    <div class="signup-box">
+      <h2>Start RMOS Academy</h2>
+      <p>Enter your email to receive the first lesson and your free manager tools.</p>
+
+      <div class="kit-form-container" id="kitSignupForm">
+        <!-- Paste the Kit inline form embed code here -->
+        <script async data-uid="e762391ba7" src="https://matthew-englehart-author-of-design.kit.com/e762391ba7/index.js"></script>
+      </div>
+
+      <p class="privacy-note">
+        You'll receive the seven-day RMOS Academy series and occasional RMOS
+        updates. Unsubscribe anytime.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title" style="font-size:24px;">Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-1" id="faq-question-1">Is RMOS Academy free?<span class="faq-icon">+</span></button>
+        <div class="faq-a" id="faq-answer-1" role="region" aria-labelledby="faq-question-1">Yes. The seven lessons and three listed manager tools are free.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-2" id="faq-question-2">Is the full RMOS product free?<span class="faq-icon">+</span></button>
+        <div class="faq-a" id="faq-answer-2" role="region" aria-labelledby="faq-question-2">RMOS Academy teaches the core management method for free. The complete RMOS system turns that method into one operating environment for daily priorities, department health, coaching, follow-ups, inventory, standards, and long-term department intelligence.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-3" id="faq-question-3">Who is this for?<span class="faq-icon">+</span></button>
+        <div class="faq-a" id="faq-answer-3" role="region" aria-labelledby="faq-question-3">Retail department managers, assistant managers, supervisors, and emerging leaders.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-4" id="faq-question-4">When will I receive the lessons?<span class="faq-icon">+</span></button>
+        <div class="faq-a" id="faq-answer-4" role="region" aria-labelledby="faq-question-4">The welcome email arrives after signup, followed by one lesson per day.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-5" id="faq-question-5">Do I need the RMOS software to use the lessons?<span class="faq-icon">+</span></button>
+        <div class="faq-a" id="faq-answer-5" role="region" aria-labelledby="faq-question-5">No. The principles and tools are useful on their own, though the paid RMOS system puts the complete method into one operating environment.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-6" id="faq-question-6">Will this work in my store?<span class="faq-icon">+</span></button>
+        <div class="faq-a" id="faq-answer-6" role="region" aria-labelledby="faq-question-6">The five pillars and daily rhythm are built to fit any retail floor, not one specific chain or category. You adapt the specifics to your department, the underlying system stays the same.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-7" id="faq-question-7">Is this just another checklist?<span class="faq-icon">+</span></button>
+        <div class="faq-a" id="faq-answer-7" role="region" aria-labelledby="faq-question-7">A checklist tells you what to do. This teaches you why those five pillars matter and how to catch the pattern when one of them starts slipping, which a checklist alone doesn't cover.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-8" id="faq-question-8">Will I actually use this after the first week?<span class="faq-icon">+</span></button>
+        <div class="faq-a" id="faq-answer-8" role="region" aria-labelledby="faq-question-8">The seven lessons install one habit at a time, not all at once, on purpose, since that's what actually makes a system stick past week one instead of fading like most do.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <h2>Your department should not depend on your memory to run well.</h2>
+    <button class="cta-btn" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">
+      Start the Free Seven-Day Academy
+    </button>
+    <p style="color:#8290A8;font-size:13.5px;margin-top:16px;">
+      Your welcome email and three free manager tools arrive in minutes.
+      Lesson 1 follows tomorrow.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <div style="margin-bottom:10px;font-weight:700;color:#8290A8;">RMOS Academy</div>
+  <div style="margin-bottom:14px;">An Englehart Systems product</div>
+  <div>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+  <div style="margin-top:16px;">RMOS Academy is provided for educational purposes.</div>
+  <div style="margin-top:10px;">&copy; 2026 Englehart Systems. All rights reserved.</div>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // Real video, in place. Fallback only hides on a confirmed successful
+  // load, never just because a URL was set, so a missing, corrupt, or
+  // failed video always falls back to the branded message instead of a
+  // blank or broken player.
+  const ACADEMY_VIDEO_URL = "RMOS-Academy-Demo-Video-1.mp4";
+  (function initVideo() {
+    const videoEl = document.getElementById('videoEl');
+    const fallbackEl = document.getElementById('videoFallback');
+    if (!ACADEMY_VIDEO_URL) return;
+
+    videoEl.addEventListener('loadeddata', function () {
+      videoEl.style.display = 'block';
+      fallbackEl.style.display = 'none';
+    });
+    videoEl.addEventListener('error', function () {
+      videoEl.style.display = 'none';
+      fallbackEl.style.display = 'flex';
+    });
+
+    videoEl.src = ACADEMY_VIDEO_URL;
+    videoEl.load();
+  })();
+
+  // Signup tracking hook. Does not touch or interfere with Kit's own
+  // submission handling in any way, this only watches for it. Wire
+  // trackAcademySignup() into real analytics later, it's a no-op stub
+  // until then. The MutationObserver is a best-effort heuristic, Kit's
+  // exact success markup isn't something this can know in advance, so
+  // this isn't a guaranteed detection, just a reasonable attempt.
+  window.trackAcademySignup = function () {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'rmos_academy_signup' });
+  };
+  (function watchForSignupSuccess() {
+    const container = document.getElementById('kitSignupForm');
+    if (!container) return;
+    const observer = new MutationObserver(function () {
+      const text = container.textContent.toLowerCase();
+      if (text.includes('success') || text.includes('thank') || text.includes('confirm')) {
+        window.trackAcademySignup();
+        observer.disconnect();
+      }
+    });
+    observer.observe(container, { childList: true, subtree: true, characterData: true });
+  })();
+</script>
+
+</body>
+</html>
