@@ -18,6 +18,15 @@
 <meta name="twitter:description" content="Free 7-day retail manager training from RMOS Academy. One short lesson a day: walk in ready, run the day, close the loop.">
 <meta name="twitter:image" content="https://rmos-academy.netlify.app/og-academy.png">
 
+<!-- Google Analytics (GA4), RMOS property. Wired Oct 24, 2026. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9B5MQLV28"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T9B5MQLV28');
+</script>
+
 <style>
   :root{
     --navy:#0F172A; --navy-soft:#1E293B; --gold:#B9852D; --gold-soft:#E8C784;
@@ -352,7 +361,7 @@
   <section id="signup">
     <div class="signup-box">
       <h2>Start RMOS Academy</h2>
-      <p>Enter your email to receive the first lesson and your free manager tools.</p>
+      <p>Enter your email to receive your free manager tools today and the first lesson tomorrow.</p>
 
       <div class="kit-form-container" id="kitSignupForm">
         <!-- Paste the Kit inline form embed code here -->
@@ -467,14 +476,17 @@
   })();
 
   // Signup tracking hook. Does not touch or interfere with Kit's own
-  // submission handling in any way, this only watches for it. Wire
-  // trackAcademySignup() into real analytics later, it's a no-op stub
-  // until then. The MutationObserver is a best-effort heuristic, Kit's
+  // submission handling in any way, this only watches for it.
+  // trackAcademySignup() fires the GA4 signup event (wired Oct 24, 2026).
+  // The MutationObserver is a best-effort heuristic, Kit's
   // exact success markup isn't something this can know in advance, so
   // this isn't a guaranteed detection, just a reasonable attempt.
   window.trackAcademySignup = function () {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'rmos_academy_signup' });
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'rmos_academy_signup', { event_category: 'lead', event_label: 'RMOS Academy 7-Day Training' });
+    }
   };
   (function watchForSignupSuccess() {
     const container = document.getElementById('kitSignupForm');
