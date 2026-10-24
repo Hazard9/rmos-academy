@@ -477,10 +477,9 @@
 
   // Signup tracking hook. Does not touch or interfere with Kit's own
   // submission handling in any way, this only watches for it.
-  // trackAcademySignup() fires the GA4 signup event (wired Oct 24, 2026).
-  // The MutationObserver is a best-effort heuristic, Kit's
-  // exact success markup isn't something this can know in advance, so
-  // this isn't a guaranteed detection, just a reasonable attempt.
+  // trackAcademySignup() fires the GA4 signup event (wired Oct 24, 2026);
+  // the watcher below arms only after a real submit and requires Kit's
+  // success message to be visible, so page views alone never count.
   window.trackAcademySignup = function () {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'rmos_academy_signup' });
@@ -491,14 +490,33 @@
   (function watchForSignupSuccess() {
     const container = document.getElementById('kitSignupForm');
     if (!container) return;
-    const observer = new MutationObserver(function () {
-      const text = container.textContent.toLowerCase();
-      if (text.includes('success') || text.includes('thank') || text.includes('confirm')) {
-        window.trackAcademySignup();
-        observer.disconnect();
+    // Only counts a signup after a real form submit, and only when Kit's
+    // success message is actually VISIBLE on the page. Kit loads a hidden
+    // copy of its success text ("Success! Now check your email to confirm
+    // your subscription.") with the form, so the earlier raw-text watch
+    // fired this event on ordinary page views. Caught Oct 24, 2026, when
+    // GA Realtime showed signup events for visits that never used the form.
+    let fired = false;
+    function successVisible() {
+      const els = container.querySelectorAll('.formkit-alert-success, [data-element="confirmation"]');
+      for (const el of els) {
+        const style = window.getComputedStyle(el);
+        const rect = el.getBoundingClientRect();
+        if (style.display !== 'none' && style.visibility !== 'hidden' && rect.height > 0 && (el.textContent || '').trim().length > 0) return true;
       }
-    });
-    observer.observe(container, { childList: true, subtree: true, characterData: true });
+      return false;
+    }
+    container.addEventListener('submit', function () {
+      const started = Date.now();
+      const timer = setInterval(function () {
+        if (fired || Date.now() - started > 15000) { clearInterval(timer); return; }
+        if (successVisible()) {
+          fired = true;
+          clearInterval(timer);
+          window.trackAcademySignup();
+        }
+      }, 400);
+    }, true);
   })();
 </script>
 
