@@ -191,28 +191,44 @@
   <section class="hero">
     <h1>Stop Managing by Memory.<br>Start Leading With <span class="accent">a System.</span></h1>
     <p class="lead">
-      RMOS Academy is a free seven-day training series for retail managers who
-      want clearer priorities, stronger daily habits, better coaching
-      follow-through, and a department that does not depend on one person
-      remembering everything.
+      Start free, right now: the Walk In Ready corporate walk one-pager and
+      three practical manager tools, in your inbox the moment you sign up.
+      Then the free seven-day RMOS Academy training builds the system behind
+      them, one short lesson a day, for retail managers who want clearer
+      priorities, stronger daily habits, and a department that does not
+      depend on one person remembering everything.
     </p>
     <button class="cta-btn" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">
       Start RMOS Academy Free
     </button>
     <div class="hero-stats">
-      <span><span class="dot"></span>7 free lessons</span>
+      <span><span class="dot"></span>Walk In Ready one-pager, free on signup</span>
       <span><span class="dot"></span>3 practical manager tools</span>
-      <span><span class="dot"></span>Built from real retail management experience</span>
+      <span><span class="dot"></span>7 free lessons</span>
+    </div>
+  </section>
+
+  <section id="signup">
+    <div class="signup-box">
+      <h2>Get Walk In Ready, Free</h2>
+      <p>Enter your email and the Walk In Ready one-pager and your three free manager tools arrive in minutes. Your seven-day training starts tomorrow, one lesson a day.</p>
+
+      <div class="kit-form-container" id="kitSignupForm">
+        <!-- Paste the Kit inline form embed code here -->
+        <script async data-uid="e762391ba7" src="https://matthew-englehart-author-of-design.kit.com/e762391ba7/index.js"></script>
+      </div>
+
+      <p class="privacy-note">
+        You'll receive the seven-day RMOS Academy series and occasional RMOS
+        updates. Unsubscribe anytime.
+      </p>
     </div>
   </section>
 
   <section>
     <div class="video-wrap">
       <div class="video-frame">
-        <!-- Set the video src below once a final file exists. Fallback
-             renders until then, never a broken player. No autoplay audio. -->
-        <div class="fallback" id="videoFallback">RM<span style="color:#B9852D">OS</span> Academy video coming soon.</div>
-        <video id="videoEl" controls playsinline preload="none" poster="RMOS-Academy-Video-Poster.jpg" style="display:none;"></video>
+        <video controls playsinline preload="none" poster="RMOS-Academy-Video-Poster-1.jpg" src="RMOS-Academy-Demo-Video-1.mp4" style="width:100%;display:block;"></video>
       </div>
     </div>
     <p style="text-align:center;color:#8290A8;font-size:14px;max-width:480px;margin:18px auto 0;line-height:1.6;">
@@ -350,30 +366,14 @@
       door.
     </p>
     <p class="section-sub">
-      Enter your email below and the one-pager arrives with your first
-      Academy lesson, free with the seven-day training.
+      Enter your email above and the one-pager arrives in your welcome
+      email within minutes, free with the seven-day training.
     </p>
     <div style="text-align:center;margin-top:22px;">
       <a class="cta-btn" href="#signup">Get the Free One-Pager</a>
     </div>
   </section>
 
-  <section id="signup">
-    <div class="signup-box">
-      <h2>Start RMOS Academy</h2>
-      <p>Enter your email to receive your free manager tools today and the first lesson tomorrow.</p>
-
-      <div class="kit-form-container" id="kitSignupForm">
-        <!-- Paste the Kit inline form embed code here -->
-        <script async data-uid="e762391ba7" src="https://matthew-englehart-author-of-design.kit.com/e762391ba7/index.js"></script>
-      </div>
-
-      <p class="privacy-note">
-        You'll receive the seven-day RMOS Academy series and occasional RMOS
-        updates. Unsubscribe anytime.
-      </p>
-    </div>
-  </section>
 
   <section>
     <h2 class="section-title" style="font-size:24px;">Questions</h2>
@@ -392,7 +392,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-4" id="faq-question-4">When will I receive the lessons?<span class="faq-icon">+</span></button>
-        <div class="faq-a" id="faq-answer-4" role="region" aria-labelledby="faq-question-4">The welcome email arrives after signup, followed by one lesson per day.</div>
+        <div class="faq-a" id="faq-answer-4" role="region" aria-labelledby="faq-question-4">Your welcome email, with the Walk In Ready one-pager and your free manager tools, arrives minutes after you confirm your signup. Lesson 1 follows tomorrow, then one lesson per day.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-5" id="faq-question-5">Do I need the RMOS software to use the lessons?<span class="faq-icon">+</span></button>
@@ -452,28 +452,6 @@
     }
   }
 
-  // Real video, in place. Fallback only hides on a confirmed successful
-  // load, never just because a URL was set, so a missing, corrupt, or
-  // failed video always falls back to the branded message instead of a
-  // blank or broken player.
-  const ACADEMY_VIDEO_URL = "RMOS-Academy-Demo-Video-1.mp4";
-  (function initVideo() {
-    const videoEl = document.getElementById('videoEl');
-    const fallbackEl = document.getElementById('videoFallback');
-    if (!ACADEMY_VIDEO_URL) return;
-
-    videoEl.addEventListener('loadeddata', function () {
-      videoEl.style.display = 'block';
-      fallbackEl.style.display = 'none';
-    });
-    videoEl.addEventListener('error', function () {
-      videoEl.style.display = 'none';
-      fallbackEl.style.display = 'flex';
-    });
-
-    videoEl.src = ACADEMY_VIDEO_URL;
-    videoEl.load();
-  })();
 
   // Signup tracking hook. Does not touch or interfere with Kit's own
   // submission handling in any way, this only watches for it.
